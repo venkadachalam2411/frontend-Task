@@ -1,0 +1,38 @@
+
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantity-control button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+  color: #1B1F2A;
+  border: 1px solid #E4E7EE;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.quantity-control button:hover:not(:disabled) {
+  background: #C2410C;
+  color: #FFFFFF;
+  border-color: #C2410C;
+}
+
+.quantity-control button:disabled {
+  opacity: 0.45;
+}
+
+.quantity-control span {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+  color: #1B1F2A;
+}

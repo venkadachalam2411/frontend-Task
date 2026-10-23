@@ -1,0 +1,174 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&display=swap");
+
+:root {
+  font-family: "Inter", sans-serif;
+  color: #1B1F2A;
+  background: #F6F7F9;
+
+  --header: #1B1F2A;
+  --accent: #C2410C;
+  --page: #F6F7F9;
+  --card: #FFFFFF;
+  --border: #E4E7EE;
+  --muted: #5B6170;
+  --free-shipping: #1F6F5A;
+
+  --text: #1B1F2A;
+  --radius-card: 16px;
+  --radius-button: 12px;
+  --content-width: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+p {
+  margin-top: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.status-message {
+  width: min(calc(100% - 32px), var(--content-width));
+  margin: 40px auto;
+  padding: 32px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.status-message p {
+  color: var(--muted);
+}
+
+.status-message button {
+  min-height: 44px;
+  padding: 0 18px;
+  color: #FFFFFF;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-button);
+  font-weight: 600;
+}
+
+.status-message button:hover {
+  background: #9A3412;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .status-message {
+    padding: 24px 16px;
+  }
+}
+/* ShopKart global theme */
+#root {
+  min-height: 100vh;
+  background: var(--page);
+}
+
+.products-page {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 40px 24px;
+  color: var(--text);
+}
+
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.add-to-cart-btn {
+  min-height: 44px;
+  color: #ffffff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-button);
+  font-weight: 700;
+}
+
+.add-to-cart-btn:hover {
+  background: #9a3412;
+}

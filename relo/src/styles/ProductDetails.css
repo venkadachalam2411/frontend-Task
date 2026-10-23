@@ -1,0 +1,153 @@
+
+.product-details {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  background: #ffffff;
+  border: 1px solid #e4e7ee;
+  border-radius: 16px;
+}
+
+/* Product images */
+.details-images {
+  min-width: 0;
+ 
+}
+
+
+.main-product-image {
+  display: block;
+  width: 100%;
+  height: 480px;
+  object-fit: contain;
+  object-position: center;
+  padding: 12px;
+  box-sizing: border-box;
+  background: #f6f7f9;
+  border: 1px solid #e4e7ee;
+  border-radius: 14px;
+}
+
+
+.thumbnail-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.thumbnail {
+  width: 82px;
+  height: 82px;
+  padding: 5px;
+  border: 1px solid #e4e7ee;
+  border-radius: 10px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.thumbnail.active {
+  border: 2px solid #c2410c;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Product information */
+.details-info {
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.details-info .product-category {
+  color: #5b6170;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.details-info h1 {
+  margin: 0 0 20px;
+  color: #1b1f2a;
+  font-family: "Manrope", sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.details-price {
+  margin: 0 0 24px;
+  color: #1b1f2a;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.details-description {
+  margin-bottom: 28px;
+  color: #5b6170;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.details-info .add-to-cart-btn {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 20px;
+  background: #c2410c;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.details-info .add-to-cart-btn:hover {
+  background: #9a3412;
+}
+
+/* Tablet */
+@media (max-width: 850px) {
+  .product-details {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin: 24px 16px;
+    padding: 20px;
+  }
+
+  .main-product-image {
+    height: 380px;
+  }
+
+  .details-info h1 {
+    font-size: 26px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .product-details {
+    margin: 16px 10px;
+    padding: 14px;
+  }
+
+  .main-product-image {
+    height: 280px;
+  }
+
+  .details-info h1 {
+    font-size: 23px;
+  }
+
+  .details-price {
+    font-size: 26px;
+  }
+}
