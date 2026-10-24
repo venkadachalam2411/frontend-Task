@@ -58,13 +58,12 @@ function ProductList() {
     loadProducts();
   }, [dispatch]);
 
-  // Keep the selected category in sync with the URL
   useEffect(() => {
     setCategory(categoryFromURL || "All");
     setCurrentPage(1);
   }, [categoryFromURL]);
 
-  // Get available categories from the API
+  
   const categories = useMemo(() => {
     const names = items
       .map((product) => product.category?.name)
@@ -73,7 +72,7 @@ function ProductList() {
     return ["All", ...new Set(names)];
   }, [items]);
 
-  // Search, filter, and sort products
+  
   const filteredProducts = useMemo(() => {
     const result = items.filter((product) => {
       const title = product.title || "";
@@ -99,7 +98,7 @@ function ProductList() {
     return result;
   }, [items, search, category, sort]);
 
-  // Reset pagination when filters change
+  
   useEffect(() => {
     setCurrentPage(1);
   }, [search, category, sort]);
@@ -132,12 +131,12 @@ function ProductList() {
     setSearchParams(nextParams);
   };
 
-  // Loading state
+  
   if (loading) {
     return <Loader message="Loading products..." />;
   }
 
-  // Error state
+ 
   if (error) {
     return (
       <div className="status-message">
@@ -156,7 +155,7 @@ function ProductList() {
 
   return (
     <main className="products-page">
-      {/* Page heading and sorting */}
+      
       <section className="products-heading">
         <div>
           <h1>
@@ -181,7 +180,7 @@ function ProductList() {
         </select>
       </section>
 
-      {/* Category filters */}
+     
       <div className="category-filters">
         {categories.map((item) => (
           <button
@@ -198,7 +197,7 @@ function ProductList() {
         ))}
       </div>
 
-      {/* Product grid */}
+     
       {currentProducts.length === 0 ? (
         <div className="status-message">
           <h2>No products found</h2>
