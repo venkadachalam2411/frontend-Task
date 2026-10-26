@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { fetchProductsAPI } from "../services/productAPI";
 import ProductCard from "../components/ProductCard";
 import "../styles/Home.css";
@@ -8,11 +8,7 @@ import "../styles/Home.css";
 function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-const navigate = useNavigate();
 
-const handleCategoryClick = (category) => {
-  navigate(`/products?category=${encodeURIComponent(category)}`);
-};
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -30,24 +26,24 @@ const handleCategoryClick = (category) => {
 
   const categories = [
     {
-      name: "Shoes",
+      name: "Laptops",
       image:
-        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500",
     },
     {
-      name: "Electronics",
+      name: "Headphones",
       image:
-        "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500",
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
     },
     {
-      name: "Miscellaneous",
+      name: "Tablets",
       image:
-        "https://images.unsplash.com/photo-1550505393-2c5dbec5de87?w=500",
+        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500",
     },
     {
-      name: "Furniture",
+      name: "Smartwatches",
       image:
-        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=500",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
     },
   ];
 
@@ -57,7 +53,9 @@ const handleCategoryClick = (category) => {
     <main className="home-page">
       <section className="home-hero">
         <div className="hero-content">
-          <span className="hero-label">YOUR EVERYDAY SHOPPING DESTINATION</span>
+          <span className="hero-label">
+            YOUR EVERYDAY SHOPPING DESTINATION
+          </span>
 
           <h1>
             Find Your
@@ -90,14 +88,16 @@ const handleCategoryClick = (category) => {
         <div className="hero-image">
           <img
             src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1000"
-            alt="A modern fashion and shopping store"
+            alt="A modern shopping store"
           />
+
           <div className="hero-image-tag">
             <span>YOUR STYLE</span>
             <strong>Your Way.</strong>
           </div>
         </div>
       </section>
+
       <section className="home-benefits">
         <div className="benefit-item">
           <span className="benefit-icon">↗</span>
@@ -123,10 +123,13 @@ const handleCategoryClick = (category) => {
           </div>
         </div>
       </section>
+
       <section className="home-section" id="categories">
         <div className="home-section-heading">
           <div>
-            <span className="section-eyebrow">EXPLORE OUR COLLECTION</span>
+            <span className="section-eyebrow">
+              EXPLORE OUR COLLECTION
+            </span>
             <h2>Shop by Category</h2>
             <p>Discover something you will love.</p>
           </div>
@@ -136,27 +139,34 @@ const handleCategoryClick = (category) => {
           </Link>
         </div>
 
-       <div className="category-grid">
-  {categories.map((item) => (
-    <Link
-      to={`/products?category=${encodeURIComponent(item.name)}`}
-      className="category-card"
-      key={item.name}
-    >
-      <img src={item.image} alt={item.name} loading="lazy" />
+        <div className="category-grid">
+          {categories.map((item) => (
+            <Link
+              to={`/products?category=${encodeURIComponent(item.name)}`}
+              className="category-card"
+              key={item.name}
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                loading="lazy"
+              />
 
-      <div className="category-overlay">
-        <h3>{item.name}</h3>
-        <span>Explore collection →</span>
-      </div>
-    </Link>
-  ))}
-</div>
+              <div className="category-overlay">
+                <h3>{item.name}</h3>
+                <span>Explore collection →</span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
+
       <section className="home-section featured-section">
         <div className="home-section-heading">
           <div>
-            <span className="section-eyebrow">HANDPICKED FOR YOU</span>
+            <span className="section-eyebrow">
+              HANDPICKED FOR YOU
+            </span>
             <h2>Featured Products</h2>
             <p>Explore some of our available products.</p>
           </div>
@@ -167,11 +177,16 @@ const handleCategoryClick = (category) => {
         </div>
 
         {loading ? (
-          <div className="home-loading">Loading products...</div>
+          <div className="home-loading">
+            Loading products...
+          </div>
         ) : featuredProducts.length > 0 ? (
           <div className="home-product-grid">
             {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+              />
             ))}
           </div>
         ) : (
@@ -186,6 +201,7 @@ const handleCategoryClick = (category) => {
           </Link>
         </div>
       </section>
+
       <section className="home-cta">
         <div>
           <span>YOUR NEXT GREAT FIND IS WAITING</span>

@@ -1,5 +1,5 @@
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
@@ -29,12 +29,13 @@ function ProductList() {
   const [category, setCategory] = useState(
     categoryFromURL || "All"
   );
+
   const [sort, setSort] = useState("featured");
   const [currentPage, setCurrentPage] = useState(1);
 
   const productsPerPage = 8;
 
-  // Fetch products from API
+ 
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -58,47 +59,66 @@ function ProductList() {
     loadProducts();
   }, [dispatch]);
 
+  
   useEffect(() => {
     setCategory(categoryFromURL || "All");
     setCurrentPage(1);
   }, [categoryFromURL]);
 
   
-  const categories = useMemo(() => {
-    const names = items
-      .map((product) => product.category?.name)
-      .filter(Boolean);
+  const categories = [
+    "All",
+    ...new Set(
+      items
+        .map((product) =>
+          product.categoryName || product.category
+        )
+        .filter(Boolean)
+    ),
+  ];
 
-    return ["All", ...new Set(names)];
-  }, [items]);
+  // Filter products by search and category
+  const filteredProducts = items.filter((product) => {
+  const productCategory = String(
+    product.categoryName || product.category?.name || product.category || ""
+  ).toLowerCase();
 
-  
-  const filteredProducts = useMemo(() => {
-    const result = items.filter((product) => {
-      const title = product.title || "";
-      const categoryName = product.category?.name || "";
+  const selectedCategory = category.toLowerCase();
 
-      const matchesSearch = title
-        .toLowerCase()
-        .includes(search.trim().toLowerCase());
+  const categoryAliases = {
+    laptops: ["laptop", "laptops", "computers"],
+    headphones: ["headphones", "headphone", "audio"],
+    tablets: ["tablet", "tablets"],
+    smartwatches: ["smartwatch", "smartwatches", "watches"],
+  };
 
-      const matchesCategory =
-        category === "All" ||
-        categoryName.toLowerCase() === category.toLowerCase();
+  const matchingCategories = categoryAliases[selectedCategory] || [
+    selectedCategory,
+  ];
 
-      return matchesSearch && matchesCategory;
-    });
+  const matchesCategory =
+    category === "All" ||
+    matchingCategories.some((name) => productCategory.includes(name));
 
-    if (sort === "low") {
-      result.sort((a, b) => Number(a.price) - Number(b.price));
-    } else if (sort === "high") {
-      result.sort((a, b) => Number(b.price) - Number(a.price));
-    }
+  const matchesSearch = String(product.title || "")
+    .toLowerCase()
+    .includes(search.toLowerCase());
 
-    return result;
-  }, [items, search, category, sort]);
+  return matchesCategory && matchesSearch;
+});
 
-  
+
+  if (sort === "low") {
+    filteredProducts.sort(
+      (a, b) => Number(a.price) - Number(b.price)
+    );
+  } else if (sort === "high") {
+    filteredProducts.sort(
+      (a, b) => Number(b.price) - Number(a.price)
+    );
+  }
+
+
   useEffect(() => {
     setCurrentPage(1);
   }, [search, category, sort]);
@@ -115,7 +135,7 @@ function ProductList() {
     startIndex + productsPerPage
   );
 
-  // Update category and URL when a category button is clicked
+ 
   const handleCategoryChange = (selectedCategory) => {
     setCategory(selectedCategory);
     setCurrentPage(1);
@@ -131,12 +151,10 @@ function ProductList() {
     setSearchParams(nextParams);
   };
 
-  
   if (loading) {
     return <Loader message="Loading products..." />;
   }
 
- 
   if (error) {
     return (
       <div className="status-message">
@@ -155,7 +173,6 @@ function ProductList() {
 
   return (
     <main className="products-page">
-      
       <section className="products-heading">
         <div>
           <h1>
@@ -180,7 +197,6 @@ function ProductList() {
         </select>
       </section>
 
-     
       <div className="category-filters">
         {categories.map((item) => (
           <button
@@ -197,7 +213,6 @@ function ProductList() {
         ))}
       </div>
 
-     
       {currentProducts.length === 0 ? (
         <div className="status-message">
           <h2>No products found</h2>
@@ -214,9 +229,12 @@ function ProductList() {
         </section>
       )}
 
-      {/* Pagination */}
+     
       {totalPages > 1 && (
-        <nav className="pagination" aria-label="Product pagination">
+        <nav
+          className="pagination"
+          aria-label="Product pagination"
+        >
           <button
             type="button"
             onClick={() =>

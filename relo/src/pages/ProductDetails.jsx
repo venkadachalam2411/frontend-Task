@@ -15,7 +15,6 @@ function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   const [selectedImage, setSelectedImage] = useState("");
 
   useEffect(() => {
@@ -27,7 +26,12 @@ function ProductDetails() {
         const data = await fetchProductByIdAPI(id);
 
         setProduct(data);
-        setSelectedImage(data.images?.[0] || "");
+
+        const images = data.images || [];
+
+        setSelectedImage(
+          images[0] || data.thumbnail || ""
+        );
       } catch (err) {
         setError(err.message || "Unable to load product");
       } finally {
@@ -51,12 +55,19 @@ function ProductDetails() {
     );
   }
 
+  const images = product.images || [];
+  const categoryName =
+    product.categoryName || product.category || "General";
+
+  const mainImage =
+    selectedImage || product.thumbnail || "";
+
   return (
     <main className="product-details">
       <div className="details-images">
         <img
           className="main-product-image"
-          src={selectedImage}
+          src={mainImage}
           alt={product.title}
           onError={(e) => {
             e.currentTarget.src =
@@ -65,12 +76,12 @@ function ProductDetails() {
         />
 
         <div className="thumbnail-list">
-          {product.images?.map((image, index) => (
+          {images.map((image, index) => (
             <button
               type="button"
               key={`${image}-${index}`}
               className={
-                selectedImage === image
+                mainImage === image
                   ? "thumbnail active"
                   : "thumbnail"
               }
@@ -87,7 +98,7 @@ function ProductDetails() {
 
       <div className="details-info">
         <p className="product-category">
-          {product.category?.name || "General"}
+          {categoryName}
         </p>
 
         <h1>{product.title}</h1>

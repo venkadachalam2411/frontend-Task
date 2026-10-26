@@ -156,7 +156,7 @@ function Cart() {
             type="button"
             className="checkout-button"
             onClick={() =>
-              alert("Checkout functionality will be added later.")
+              alert("Thank you for your purchase!")
             }
           >
             Proceed to Checkout

@@ -1,10 +1,19 @@
+
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
+
 import "../styles/ProductCard.css";
+
 function ProductCard({ product }) {
   const dispatch = useDispatch();
-  const image = product.images?.[0];
+
+  const image =
+    product.thumbnail || product.images?.[0] || "";
+
+  const categoryName =
+    product.categoryName || product.category || "";
+
   return (
     <div className="product-card">
       <Link
@@ -14,26 +23,27 @@ function ProductCard({ product }) {
         <img
           src={image}
           alt={product.title}
-          className="product-image"
           onError={(e) => {
             e.currentTarget.src =
-              "https://placehold.co/400x400?text=No+Image";
+              "https://placehold.co/500x500?text=No+Image";
           }}
         />
       </Link>
+
       <div className="product-info">
-{product.category?.name?.toLowerCase() !==
-  "updated category name" && (
-  <p className="product-category">
-    {product.category?.name || ""}
-  </p>
-)}
+        {categoryName && (
+          <p className="product-category">
+            {categoryName}
+          </p>
+        )}
+
         <Link
           to={`/product/${product.id}`}
           className="product-title"
         >
           {product.title}
         </Link>
+
         <p className="product-price">
           ${Number(product.price).toFixed(2)}
         </p>
@@ -49,4 +59,5 @@ function ProductCard({ product }) {
     </div>
   );
 }
+
 export default ProductCard;

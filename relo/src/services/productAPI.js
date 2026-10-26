@@ -1,6 +1,4 @@
-
-const API_URL =
-  "https://api.escuelajs.co/api/v1/products?offset=0&limit=40";
+const API_URL = "https://dummyjson.com/c/1a1a-ba82-4210-b7eb";
 
 export const fetchProductsAPI = async () => {
   const response = await fetch(API_URL);
@@ -11,17 +9,19 @@ export const fetchProductsAPI = async () => {
 
   const data = await response.json();
 
-  return data;
+  return data.products;
 };
 
 export const fetchProductByIdAPI = async (id) => {
-  const response = await fetch(
-    `https://api.escuelajs.co/api/v1/products/${id}`
+  const products = await fetchProductsAPI();
+
+  const product = products.find(
+    (item) => item.id === Number(id)
   );
 
-  if (!response.ok) {
+  if (!product) {
     throw new Error("Product not found");
   }
 
-  return await response.json();
+  return product;
 };
