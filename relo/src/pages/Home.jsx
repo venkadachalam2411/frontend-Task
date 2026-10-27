@@ -87,8 +87,8 @@ function Home() {
 
         <div className="hero-image">
           <img
-            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1000"
-            alt="A modern shopping store"
+            src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1000"
+            alt="Electronics and gadgets"
           />
 
           <div className="hero-image-tag">
